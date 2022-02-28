@@ -10,11 +10,18 @@ package com.victor.tarea2;
  */
 public class Frame2 extends javax.swing.JFrame {
 
+    private static Usuario[] listaUsuario=new Usuario[2];
+    
     /**
      * Creates new form Frame2
      */
     public Frame2() {
         initComponents();
+        initComponents2();              /**Código para Centrar Ventana*/
+    }
+    
+    public void initComponents2(){      /**Código para Centrar Ventana*/
+        setLocationRelativeTo(null);    /**Código para Centrar Ventana*/
     }
 
     /**
@@ -26,13 +33,76 @@ public class Frame2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jToggleButton1 = new javax.swing.JToggleButton();
         jPanel1 = new javax.swing.JPanel();
+        Buttom_Refrescar = new javax.swing.JButton();
+        TXT_Password = new javax.swing.JTextField();
+        TXT_User_Name = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        Buttom_Add_User = new javax.swing.JButton();
+        Buttom_Regresar_Iniciar_Sesion = new javax.swing.JButton();
+
+        jToggleButton1.setText("jToggleButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(683, 384));
         jPanel1.setLayout(null);
+
+        Buttom_Refrescar.setText("Refresh");
+        Buttom_Refrescar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Buttom_RefrescarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Buttom_Refrescar);
+        Buttom_Refrescar.setBounds(280, 20, 80, 25);
+        jPanel1.add(TXT_Password);
+        TXT_Password.setBounds(20, 60, 160, 30);
+        jPanel1.add(TXT_User_Name);
+        TXT_User_Name.setBounds(20, 20, 160, 30);
+
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jLabel1.setText("Register");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(580, 10, 90, 30);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(20, 110, 640, 260);
+
+        Buttom_Add_User.setText("Add User");
+        Buttom_Add_User.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Buttom_Add_UserActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Buttom_Add_User);
+        Buttom_Add_User.setBounds(190, 20, 80, 25);
+
+        Buttom_Regresar_Iniciar_Sesion.setText("Back");
+        Buttom_Regresar_Iniciar_Sesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Buttom_Regresar_Iniciar_SesionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Buttom_Regresar_Iniciar_Sesion);
+        Buttom_Regresar_Iniciar_Sesion.setBounds(370, 20, 80, 25);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -51,6 +121,34 @@ public class Frame2 extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void Buttom_RefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Buttom_RefrescarActionPerformed
+        
+        for (int i = 0; i < listaUsuario.length; i++) {
+            
+            if (listaUsuario[i]!=null){
+                System.out.println("*********");
+                System.out.println(listaUsuario[i].getNombreUsuario());
+                System.out.println(listaUsuario[i].getPassword());
+                System.out.println("*********");
+            }
+            
+        }
+        
+    }//GEN-LAST:event_Buttom_RefrescarActionPerformed
+
+    private void Buttom_Add_UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Buttom_Add_UserActionPerformed
+        for (int i = 0; i < listaUsuario.length; i++) {
+            if (listaUsuario[i]==null){
+                listaUsuario[i] = new Usuario(TXT_User_Name.getText(), TXT_Password.getText());
+                break;
+            }
+        }
+    }//GEN-LAST:event_Buttom_Add_UserActionPerformed
+
+    private void Buttom_Regresar_Iniciar_SesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Buttom_Regresar_Iniciar_SesionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Buttom_Regresar_Iniciar_SesionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -88,6 +186,15 @@ public class Frame2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Buttom_Add_User;
+    private javax.swing.JButton Buttom_Refrescar;
+    private javax.swing.JButton Buttom_Regresar_Iniciar_Sesion;
+    private javax.swing.JTextField TXT_Password;
+    private javax.swing.JTextField TXT_User_Name;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }
