@@ -100,7 +100,7 @@ public class Frame1 extends javax.swing.JFrame {
     private void Buttom_Iniciar_SesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Buttom_Iniciar_SesionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Buttom_Iniciar_SesionActionPerformed
-
+    
     /**
      * @param args the command line arguments
      */

@@ -20,10 +20,34 @@ public class Frame2 extends javax.swing.JFrame {
         initComponents2();              /**Código para Centrar Ventana*/
     }
     
-    public void initComponents2(){      /**Código para Centrar Ventana*/
+    private void initComponents2(){      /**Código para Centrar Ventana*/
         setLocationRelativeTo(null);    /**Código para Centrar Ventana*/
     }
+    
+    private Usuario[] redimensionarArreglo(Usuario[] arreglo){
+        Usuario[] temporal=new Usuario[arreglo.length + 1];        
+        for (int i = 0; i < arreglo.length; i++) {            
+            temporal[i]=arreglo[i];
+        }
+        return temporal;
+    }
+    
+    
+    // Método que verifica si hay espacio para redimensionar el arreglo.
+    
+    private Boolean hayEspacio(Usuario[] arreglo){
+        Boolean espacio=false;
+        for (int i = 0; i < arreglo.length; i++) {
+            if (arreglo[i]==null) {                
+                espacio=true;
+                break;
+            }
+        }
+        return espacio;
+    }
 
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,11 +62,13 @@ public class Frame2 extends javax.swing.JFrame {
         Buttom_Refrescar = new javax.swing.JButton();
         TXT_Password = new javax.swing.JTextField();
         TXT_User_Name = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        Mostrar_Contra = new javax.swing.JLabel();
         Buttom_Add_User = new javax.swing.JButton();
         Buttom_Regresar_Iniciar_Sesion = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        Mostrar_Usuario = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         jToggleButton1.setText("jToggleButton1");
 
@@ -59,32 +85,16 @@ public class Frame2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(Buttom_Refrescar);
-        Buttom_Refrescar.setBounds(280, 20, 80, 25);
+        Buttom_Refrescar.setBounds(20, 90, 80, 25);
         jPanel1.add(TXT_Password);
-        TXT_Password.setBounds(20, 60, 160, 30);
+        TXT_Password.setBounds(190, 20, 160, 30);
         jPanel1.add(TXT_User_Name);
         TXT_User_Name.setBounds(20, 20, 160, 30);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jLabel1.setText("Register");
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(580, 10, 90, 30);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(20, 110, 640, 260);
+        Mostrar_Contra.setBackground(new java.awt.Color(255, 255, 153));
+        Mostrar_Contra.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jPanel1.add(Mostrar_Contra);
+        Mostrar_Contra.setBounds(360, 150, 290, 30);
 
         Buttom_Add_User.setText("Add User");
         Buttom_Add_User.addActionListener(new java.awt.event.ActionListener() {
@@ -93,7 +103,7 @@ public class Frame2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(Buttom_Add_User);
-        Buttom_Add_User.setBounds(190, 20, 80, 25);
+        Buttom_Add_User.setBounds(20, 60, 80, 25);
 
         Buttom_Regresar_Iniciar_Sesion.setText("Back");
         Buttom_Regresar_Iniciar_Sesion.addActionListener(new java.awt.event.ActionListener() {
@@ -102,7 +112,27 @@ public class Frame2 extends javax.swing.JFrame {
             }
         });
         jPanel1.add(Buttom_Regresar_Iniciar_Sesion);
-        Buttom_Regresar_Iniciar_Sesion.setBounds(370, 20, 80, 25);
+        Buttom_Regresar_Iniciar_Sesion.setBounds(20, 120, 80, 25);
+
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jLabel2.setText("Register");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(580, 10, 90, 30);
+
+        Mostrar_Usuario.setBackground(new java.awt.Color(255, 255, 153));
+        Mostrar_Usuario.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jPanel1.add(Mostrar_Usuario);
+        Mostrar_Usuario.setBounds(320, 110, 290, 30);
+
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jLabel4.setText("Usuario:");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(220, 110, 90, 30);
+
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jLabel3.setText("Contraseña:");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(220, 150, 140, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -136,8 +166,17 @@ public class Frame2 extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_Buttom_RefrescarActionPerformed
-
+        
     private void Buttom_Add_UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Buttom_Add_UserActionPerformed
+        
+        //Verificación si hay que redimensionar arreglo
+        if (!hayEspacio(listaUsuario)) {
+            System.out.println("Tamaño Actual: " + listaUsuario.length);
+            listaUsuario = redimensionarArreglo(listaUsuario);
+            System.out.println("Tamaño Nuevo: " + listaUsuario.length);
+        }
+        
+        //Busca Posición Vacía para Agregar al Usuario
         for (int i = 0; i < listaUsuario.length; i++) {
             if (listaUsuario[i]==null){
                 listaUsuario[i] = new Usuario(TXT_User_Name.getText(), TXT_Password.getText());
@@ -189,12 +228,14 @@ public class Frame2 extends javax.swing.JFrame {
     private javax.swing.JButton Buttom_Add_User;
     private javax.swing.JButton Buttom_Refrescar;
     private javax.swing.JButton Buttom_Regresar_Iniciar_Sesion;
+    private javax.swing.JLabel Mostrar_Contra;
+    private javax.swing.JLabel Mostrar_Usuario;
     private javax.swing.JTextField TXT_Password;
     private javax.swing.JTextField TXT_User_Name;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }
